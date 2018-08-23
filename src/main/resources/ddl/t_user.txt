@@ -1,0 +1,12 @@
+CREATE TABLE `t_user` (
+  `id` varchar(255) NOT NULL,
+  `user_name` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `age` int(4) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `region_id` int(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

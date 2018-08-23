@@ -1,0 +1,8 @@
+CREATE TABLE `region` (
+  `id` int(20) NOT NULL,
+  `parent_region_id` int(20) DEFAULT NULL,
+  `region_name` varchar(20) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
