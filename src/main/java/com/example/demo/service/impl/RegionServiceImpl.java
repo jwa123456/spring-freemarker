@@ -4,6 +4,7 @@ import com.example.demo.dao.RegionDao;
 import com.example.demo.entity.Region;
 import com.example.demo.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author wei.jiang
  * @since 2018/8/23
  */
+@Service
 public class RegionServiceImpl implements RegionService {
 
     @Autowired

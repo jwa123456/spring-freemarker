@@ -18,6 +18,6 @@ public interface RegionDao extends JpaRepository<Region, String> {
 
     List<Region> queryByParentRegionId(int parentId);
 
-    @Query(value = "select id,region_name from region where parent_region_id=0", nativeQuery = true)
+    @Query(value = "select id,region_name,parent_region_id,create_time,update_time from region where parent_region_id=0", nativeQuery = true)
     List<Region> queryParentId();
 }
