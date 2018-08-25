@@ -64,8 +64,7 @@
                     <td>${user.id!''}</td>
                     <td>${user.userName!''}</td>
                     <td>
-                        <input type="button" name="detail" class="btn btn-primary" value="详情"/>
-                    <#--<a class="btn btn-warning" data-tempate_id="${template.id!''}" name="template_log">日志</a>-->
+                        <input type="button" name="detail" class="btn btn-primary" value="详情" data-id="${user.id!''}"/>
                     </td>
                 </tr>
             </#list>
@@ -120,6 +119,12 @@
                     $("#region").html(temp_html);
                 }
             });
+        });
+
+        $("input[name='detail']").on('click', function () {
+            var userId = $(this).data("id");
+            var url = "user_info?id=" + userId;
+            window.open(url);
         });
 
         $("#searchBtn").on('click', function () {

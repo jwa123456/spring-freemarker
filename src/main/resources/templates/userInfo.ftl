@@ -1,58 +1,86 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
-    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/default.css}" rel="stylesheet"/>
-    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
-    <meta charset="UTF-8"/>
-    <title>书籍管理</title>
+    <script type="text/javascript" src="../static/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../static/bootstrap.min.js"></script>
+    <link href="../static/bootstrap.min.css" rel="stylesheet"/>
+    <title>用户详情</title>
+    <style>
+        .contentDiv {
+            padding: 20px 60px;
+        }
+    </style>
 </head>
 
 <body>
 <div class="contentDiv">
 
-    <h5>《Spring Boot 2.x 核心技术实战 - 上 基础篇》第 4 章《模板引擎》Demo </h5>
-
     <legend>
-        <strong>书籍管理</strong>
+        <strong>用户详情</strong>
     </legend>
 
-    <form th:action="@{/book/{action}(action=${action})}" method="post" class="form-horizontal">
+    <form action="/" method="post" class="form-horizontal">
 
-        <input type="hidden" name="id" th:value="${book.id}"/>
+        <input type="hidden" name="id" value="${user.id!''}"/>
 
         <div class="form-group">
-            <label for="book_name" class="col-sm-2 control-label">书名:</label>
+            <label for="book_name" class="col-sm-2 control-label">用户名:</label>
             <div class="col-xs-4">
-                <input type="text" class="form-control" id="book_name" name="name" th:value="${book.name}"
-                       th:field="*{book.name}"/>
+                <input type="text" class="form-control" id="userName" name="userName" value="${user.userName!''}"/>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="book_writer" class="col-sm-2 control-label">作者:</label>
+            <label for="book_writer" class="col-sm-2 control-label">邮箱:</label>
             <div class="col-xs-4">
-                <input type="text" class="form-control" id="book_writer" name="writer" th:value="${book.writer}"
-                       th:field="*{book.writer}"/>
+                <input type="text" class="form-control" id="email" name="email" value="${user.email!''}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="book_writer" class="col-sm-2 control-label">年龄:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="age" name="age" value="${user.age!''}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="book_writer" class="col-sm-2 control-label">地区:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="region" name="region" value="${region!''}" readonly/>
+                <input type="hidden" name="regionId" value="${user.regionId?c}"/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="book_introduction" class="col-sm-2 control-label">简介:</label>
             <div class="col-xs-4">
-                <textarea class="form-control" id="book_introduction" rows="3" name="introduction"
-                          th:value="${book.introduction}" th:field="*{book.introduction}"></textarea>
+                <textarea class="form-control" id="comment" rows="3" name="comment">${user.comment!''}</textarea>
             </div>
         </div>
+        <input type="hidden" name="createTime" value="${user.createTime!''}"/>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;&nbsp;
-                <input class="btn" type="button" value="返回" onclick="history.back()"/>
+                <input class="btn btn-primary" type="button" value="提交" id="submit"/>&nbsp;&nbsp;
             </div>
         </div>
     </form>
 </div>
 </body>
+<script type="text/javascript">
+    $(function () {
+        $("#submit").on('click', function () {
+            $.ajax({
+                type: 'post',
+                url: 'save_user',
+                data: $("form").serialize(),
+                success: function (data) {
+                    if (data) {
+                        alert("保存成功");
+                        location.href = 'list_page';
+                    }
+                }
+            });
+        })
+    })
+</script>
 </html>
